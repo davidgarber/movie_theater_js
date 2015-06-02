@@ -9,19 +9,41 @@ var Ticket = {
   },
 
   firstRelease: function(firstRelease) {
-    if (firstRelease == 1) {
+    if (firstRelease == "no") {
       return this.cost;
-    } else if (firstRelease == 2) {
+    } else if (firstRelease == "yes") {
       this.cost = this.cost + 3;
       return this.cost;
     }
   },
 
   movieTime: function(movieTime) {
-    if (movieTime < 6) {
+    if (movieTime < "18:00") {
       this.cost = this.cost - 3;
-    } else if (movieTime >= 6) {
+    } else if (movieTime >= "18:00") {
       return this.cost;
     }
   }
 };
+
+$(document).ready(function() {
+
+  var newTicket = Object.create(Ticket);
+
+  $("form#Ticket").submit(function(event) {
+   var inputtedAge = parseInt($("input#age").val());
+   var inputtedRelease = $("select#release").val();
+   var inputtedTime = $("select#movietime").val();
+
+   newTicket.age(inputtedAge)
+   newTicket.firstRelease(inputtedRelease)
+   newTicket.movieTime(inputtedTime)
+
+   $(".ticketcost").text(newTicket.cost);
+   event.preventDefault();
+
+  });
+
+
+
+});

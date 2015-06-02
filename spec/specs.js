@@ -16,13 +16,13 @@ describe("Ticket", function() {
  describe("firstRelease", function() {
    it("does not give a discount if it is not a first release", function() {
      var testTicket = Object.create(Ticket)
-     testTicket.firstRelease(1)
+     testTicket.firstRelease("no")
      expect(testTicket.cost).to.equal(10)
    });
 
    it("increases cost if it is a first release", function() {
      var testTicket = Object.create(Ticket)
-     testTicket.firstRelease(2)
+     testTicket.firstRelease("yes")
      expect(testTicket.cost).to.equal(13)
    });
  });
@@ -30,13 +30,13 @@ describe("Ticket", function() {
  describe("movieTime", function() {
    it("gives a discount if time is before 6", function() {
      var testTicket = Object.create(Ticket)
-     testTicket.movieTime(5)
+     testTicket.movieTime("17:00")
      expect(testTicket.cost).to.equal(7)
    });
 
    it("does not give a discount if the time is 6 or after", function() {
      var testTicket = Object.create(Ticket)
-     testTicket.movieTime(7)
+     testTicket.movieTime("19:00")
      expect(testTicket.cost).to.equal(10)
    });
  });
